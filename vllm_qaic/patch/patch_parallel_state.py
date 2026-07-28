@@ -150,6 +150,10 @@ vllm.distributed.parallel_state.cleanup_dist_env_and_memory = (
 
 # core.py does a direct `from ... import cleanup_dist_env_and_memory`, so its
 # local name is already bound — patch the reference there too.
-import vllm.v1.engine.core as _core
+import vllm.v1.engine.core as _core  # noqa: E402
 
 _core.cleanup_dist_env_and_memory = _patched_cleanup_dist_env_and_memory
+
+import vllm.distributed as _distributed  # noqa: E402
+
+_distributed.cleanup_dist_env_and_memory = _patched_cleanup_dist_env_and_memory

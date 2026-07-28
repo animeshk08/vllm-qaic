@@ -11,8 +11,8 @@ build-backend = "setuptools.build_meta"
 name = "vllm-qaic"
 description = "QAIC plugin package for vLLM"
 readme = "README.md"
-license = "Apache-2.0"
-authors = [{ name = "Qualcomm Data Center, LLM Serving Team" }]
+license = { text = "Qualcomm Proprietary and Confidential" }
+authors = [{ name = "Qualcomm Cloud AI ML Team" }]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -46,6 +46,13 @@ namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
 ignore_patterns = [
     "build/**",
     "examples/**",
+]
+
+[tool.ruff]
+# Allow lines to be as long as 90.
+line-length = 90
+exclude = [
+    "tests/**",
 ]
 
 [tool.ruff.lint]
@@ -115,3 +122,10 @@ override-dependencies = [
 
 [tool.uv.sources]
 vllm = { git = "https://github.com/vllm-project/vllm", rev = "v0.15.0" }
+
+[tool.pytest.ini_options]
+markers = [
+    "qaic_test_config(**kwargs): per-test/module QAIC run configuration overrides",
+    "qaic_aot_mode: test requires QAIC AOT (ahead-of-time compiled) mode to be installed",
+    "qaic_disagg_installed: test requires the qaic_disagg package to be installed",
+]
