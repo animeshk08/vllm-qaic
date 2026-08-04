@@ -16,6 +16,10 @@ logger = init_logger(__name__)
 
 class QaicPlatform(QaicPlatformBase):
     @classmethod
+    def get_punica_wrapper(cls) -> str:
+        return "vllm.lora.punica_wrapper.punica_cpu.PunicaWrapperCPU"
+
+    @classmethod
     def pre_register_and_update(cls, parser=None) -> None:
         cls.device_type = "qaic"
         # Adapt the patch here.
