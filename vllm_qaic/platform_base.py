@@ -453,7 +453,7 @@ class QaicPlatform(Platform):
 
                 uniproc_executor.UniProcExecutor = QaicUniProcExecutor
                 stages = int(override_qaic_config.get("stages"))
-                assert (
+                assert not scheduler_config.async_scheduling or (
                     stages is None
                     or int(stages) <= 1
                     or vllm_config.scheduler_config.max_num_seqs <= int(stages)
